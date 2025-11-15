@@ -18,4 +18,23 @@ function primitiveMultiply(a, b) {
 
 function reliableMultiply(a, b) {
   // Your code here.
+  var x; 
+  while(!x){//creates loop until x is true
+    try {
+      x = primitiveMultiply(a, b);//!x will terminate loop once x is assigned a result
+    } 
+    catch(error) {//catches errors
+      if (!error instanceof MultiplicatorUnitFailure) {
+        throw error;
+      }
+    }
+  }
+  return x;
 }
+
+console.log(reliableMultiply(8, 8));
+console.log(reliableMultiply(8, 6));
+console.log(reliableMultiply(3, 5));
+console.log(reliableMultiply(11, 10));
+console.log(reliableMultiply(-2, -2));
+console.log(reliableMultiply("3", "5"));
