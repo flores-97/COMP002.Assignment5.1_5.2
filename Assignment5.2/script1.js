@@ -20,5 +20,34 @@
 // to at minimum add listeners to each link and toggle the display of the tab contents.
 // Hint: display: none; hides an element, and display: block; will bring it
 
+ // Select the balloon element
+        let balloon = document.getElementById('balloon');
+        const changeAmount = 5; 
+        const maxSize = 100; // The size at which the balloon "pops"
+        let isPopped = false; // Flag to check if it has already popped
 
-//https://codepen.io/jacobpad/pen/zQBOQy
+        window.addEventListener('keydown', (e) => {
+            e.preventDefault(); 
+
+            if (isPopped) return;
+
+            let currentSize = parseInt(window.getComputedStyle(balloon).fontSize);
+
+            if (e.key === 'ArrowUp') {//increase size
+                let newSize = currentSize + changeAmount;
+
+                if (newSize > maxSize) {
+                    balloon.textContent = '💥'; // image when explodes
+                    balloon.style.fontSize = '100px'; // at this size explode
+                    isPopped = true; 
+                } else {
+                    // Grow the balloon normally
+                    balloon.style.fontSize = newSize + 'px';
+                }
+
+            } else if (e.key === 'ArrowDown') {//decrease size
+                balloon.style.fontSize = Math.max(5, currentSize - changeAmount) + 'px';
+            }
+        });
+
+        
